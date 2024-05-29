@@ -1,3 +1,4 @@
 .env
 vendor
 storage/app/pools/golang/pkg
+node_modules
