@@ -18,14 +18,13 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 Route::get('/', function () {
-    error_log("test");
 
-    // $path = "cd ..\storage\app\pools\golang\piscine";
+    // $path = "cd ..\storage\app\pools\golang\pool";
     // $controller = new testController("$path && go run", "$path-test && go run", "golang","main.go");
 
-    // $result = $controller->RegularTest("KAymeric-BLeonard-ProjetDev-2024", "/printalphabet","main.go");
+    // $result = $controller->RegularTest("KAymeric-BLeonard-ProjetDev-2024", "User-repo-test", "/printalphabet","main.go");
     // echo $result ? 'true' : 'false';;
-    // $result = $controller->RegularTest("KAymeric-BLeonard-ProjetDev-2024", "","atoi.go", "fmt.Println(piscine.Atoi(\"456\"))\nfmt.Println(piscine.Atoi(\"abc\"))");
+    // $result = $controller->RegularTest("KAymeric-BLeonard-ProjetDev-2024", "User-repo-test", "","atoi.go", "fmt.Println(pool.Atoi(\"456\"))\nfmt.Println(pool.Atoi(\"abc\"))");
     // echo $result ? 'true' : 'false';;
     return view('welcome');   
 });
@@ -43,3 +42,6 @@ Route::get('/github/callback', function () {
 });
 
 Route::get('/admin/permissions', [App\Http\Controllers\Admin\Permissions::class, 'index'])->name('permissions');
+Route::get('/admin/pools', [App\Http\Controllers\Admin\poolController::class, 'index'])->name('poolsAdmin');
+Route::get('/admin/quests', [App\Http\Controllers\Admin\questController::class, 'index'])->name('questsAdmin');
+Route::get('/admin/exercices', [App\Http\Controllers\Admin\exerciseController::class, 'index'])->name('exercicesAdmin');
