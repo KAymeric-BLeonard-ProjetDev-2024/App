@@ -11,6 +11,7 @@ class FileController extends Controller
     private $userFile;
 
     public function __construct($args,$user,$file){
+        error_log("args: \n args");
         $this->mainGo = "package main\nimport (\n\"fmt\"\n\"piscine\"\n)\nfunc main() {\n$args\n}\n";
 
         $path = dirname($_SERVER['SCRIPT_FILENAME']). "\..\storage\app\pools\golang\piscine";
