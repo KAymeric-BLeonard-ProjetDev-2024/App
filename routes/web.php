@@ -6,6 +6,9 @@ use App\Http\Controllers\Auth\GithubAuth;
 use App\Http\Controllers\Admin\SetAdmin;
 use Laravel\Socialite\Facades\Socialite;
 
+use App\Http\Controllers\pools\poolController;
+use App\Http\Controllers\pools\questController;
+use App\Http\Controllers\pools\exerciseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,20 +20,9 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-
-    // $path = "cd ..\storage\app\pools\golang\pool";
-    // $controller = new testController("$path && go run", "$path-test && go run", "golang","main.go");
-
-    // $result = $controller->RegularTest("KAymeric-BLeonard-ProjetDev-2024", "User-repo-test", "/printalphabet","main.go");
-    // echo $result ? 'true' : 'false';;
-    // $result = $controller->RegularTest("KAymeric-BLeonard-ProjetDev-2024", "User-repo-test", "","atoi.go", "fmt.Println(pool.Atoi(\"456\"))\nfmt.Println(pool.Atoi(\"abc\"))");
-    // echo $result ? 'true' : 'false';;
-    return view('welcome');   
-});
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
  
 Route::get('/github/auth', function () {
@@ -41,23 +33,32 @@ Route::get('/github/callback', function () {
     return GithubAuth::connectFromGithub();
 });
 
-Route::get('/admin/permissions', [App\Http\Controllers\Admin\Permissions::class, 'index'])->name('permissions');
-Route::get('/admin/pools', [App\Http\Controllers\Admin\poolController::class, 'index'])->name('poolsAdmin');
-Route::get('/admin/quests', [App\Http\Controllers\Admin\questController::class, 'index'])->name('questsAdmin');
-Route::get('/admin/exercices', [App\Http\Controllers\Admin\exerciseController::class, 'index'])->name('exercicesAdmin');
+Route::get('/admin/permissions', [App\Http\Controllers\Admin\Permissions::class, 'index'])->name('permissions')->middleware('auth');;
+Route::get('/admin/pools', [App\Http\Controllers\Admin\poolController::class, 'index'])->name('poolsAdmin')->middleware('auth');;
+Route::get('/admin/quests', [App\Http\Controllers\Admin\questController::class, 'index'])->name('questsAdmin')->middleware('auth');;
+Route::get('/admin/exercices', [App\Http\Controllers\Admin\exerciseController::class, 'index'])->name('exercicesAdmin')->middleware('auth');;
 
 Route::get('/pool/{id}', function (string $id) {
-    return App\Http\Controllers\pools\poolController::index($id);
-})->name('pool');
+    $ctrl = new poolController();
+
+    return $ctrl->index($id);
+})->name('pool')->middleware('auth');;
 
 Route::get('/quest/{id}', function (string $id) {
-    return App\Http\Controllers\pools\questController::index($id);
-})->name('quest');
+    $ctrl = new questController();
+
+    return $ctrl->index($id);
+})->name('quest')->middleware('auth');;
 
 Route::get('/exercise/{id}', function (string $id) {
-    return App\Http\Controllers\pools\exerciseController::index($id);
-})->name('exercise');
+    $ctrl = new exerciseController();
+
+    return $ctrl->index($id);
+})->name('exercise')->middleware('auth');
 
 Route::get('/test/{id}', function (string $id) {
-    return App\Http\Controllers\pools\exerciseController::test($id);
-})->name('test');
+    $ctrl = new exerciseController();
+
+    return $ctrl->test($id);
+})->name('test')->middleware('auth');
+

@@ -9,12 +9,16 @@ use App\Models\quest;
 
 class questController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public static function index($id)
+    public function index($id)
     {
         $exercises = exercise::all()->where('quest', $id);
         $quest = quest::where('id', $id)->first();
