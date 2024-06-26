@@ -45,3 +45,19 @@ Route::get('/admin/permissions', [App\Http\Controllers\Admin\Permissions::class,
 Route::get('/admin/pools', [App\Http\Controllers\Admin\poolController::class, 'index'])->name('poolsAdmin');
 Route::get('/admin/quests', [App\Http\Controllers\Admin\questController::class, 'index'])->name('questsAdmin');
 Route::get('/admin/exercices', [App\Http\Controllers\Admin\exerciseController::class, 'index'])->name('exercicesAdmin');
+
+Route::get('/pool/{id}', function (string $id) {
+    return App\Http\Controllers\pools\poolController::index($id);
+})->name('pool');
+
+Route::get('/quest/{id}', function (string $id) {
+    return App\Http\Controllers\pools\questController::index($id);
+})->name('quest');
+
+Route::get('/exercise/{id}', function (string $id) {
+    return App\Http\Controllers\pools\exerciseController::index($id);
+})->name('exercise');
+
+Route::get('/test/{id}', function (string $id) {
+    return App\Http\Controllers\pools\exerciseController::test($id);
+})->name('test');

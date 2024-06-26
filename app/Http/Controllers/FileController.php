@@ -11,9 +11,10 @@ class FileController extends Controller
     private $userFile;
 
     public function __construct($args,$user,$file){
-        $this->mainGo = "package main\nimport (\n\"fmt\"\n\"pool\"\n)\nfunc main() {\n$args\n}\n";
+        error_log("args: \n args");
+        $this->mainGo = "package main\nimport (\n\"fmt\"\n\"piscine\"\n)\nfunc main() {\n$args\n}\n";
 
-        $path = dirname($_SERVER['SCRIPT_FILENAME']). "\..\storage\app\pools\golang\pool";
+        $path = dirname($_SERVER['SCRIPT_FILENAME']). "\..\storage\app\pools\golang\piscine";
         $this->testFile = $path . "\main\\$user-$file";
         $this->userFile = $path . "-test\main\\$user-$file";
 
