@@ -41,7 +41,9 @@ class testController extends Controller
         }
 
         unlink($userFilePath);
+
+        $terminal = "Expected output:\n" . $this->corect_result . "\n\nYour output:\n" . $this->user_result;
         
-        return [$this->corect_result == $this->user_result, $this->user_result];
+        return [$this->corect_result == $this->user_result, $terminal];
     }
 }
