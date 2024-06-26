@@ -13,12 +13,17 @@ use App\Http\Controllers\testController;
 
 class exerciseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public static function index($id)
+    public function index($id)
     {
         $terminal = $_GET['terminal'];
         $result = $_GET['result'];

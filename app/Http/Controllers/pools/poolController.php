@@ -9,12 +9,17 @@ use Illuminate\Http\Request;
 
 class poolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public static function index($id)
+    public function index($id)
     {
         $quests = Quest::all()->where('pool', $id);
         $pool = Pool::where('id', $id)->first();;
